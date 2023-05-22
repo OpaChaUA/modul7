@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'modul7'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+// https://mvnrepository.com/artifact/com.kumuluz.ee/kumuluzee-json-p-jsonp
+    implementation 'com.kumuluz.ee:kumuluzee-json-p-jsonp:4.1.0'
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation 'org.jsoup:jsoup:1.16.1'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
