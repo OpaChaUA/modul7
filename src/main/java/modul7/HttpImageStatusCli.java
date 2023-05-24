@@ -11,18 +11,20 @@ public class HttpImageStatusCli {
     void askStatus() {
 
         Scanner scanner = new Scanner(System.in);
-        while (!isExit) {
+        while (true) {
             System.out.print("Enter HTTP status code, or exit to end the program");
             if (scanner.hasNextInt()) {
                 int userInput = scanner.nextInt();
                 new HttpStatusChecker().getStatusImage(userInput);
                 downloader.downloadStatusImage(userInput);
+                continue;
             } else {
                 System.out.println("Please enter valid number or exit");
-                continue;
             }
             String stop = scanner.nextLine();
-            isExit = stop.equals("exit");
+            if (stop.equalsIgnoreCase("exit")) {
+                break;
+            }
         }
     }
 }
