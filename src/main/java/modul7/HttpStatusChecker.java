@@ -8,19 +8,26 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class HttpStatusChecker {
-    public String getStatusImage(int code) throws IOException, InterruptedException {
+    HelperClass help = new HelperClass();
+   private HttpResponse<String> response = null;
+
+    public String getStatusImage(int code) {
         String url = "https://http.cat/" + code + ".jpg";
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
-        HttpResponse<String> respons = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        if (respons.statusCode() == 200) {
-            return url;
-        } else {
-            throw new IOException("Failed to retrieve image. Response code:" + respons.statusCode());
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return url;
+            } else {
+                throw new IOException("Failed to retrieve image. Response code: " + response.statusCode());
+            }
+        } catch (IOException | InterruptedException e) {
+            System.err.println("There is not image for HTTP status "+code);
         }
+        return "Failed to retrieve image. Response code: " + response.statusCode();
     }
-
 }

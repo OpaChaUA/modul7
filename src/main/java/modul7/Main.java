@@ -4,15 +4,15 @@ import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args)  {
-        HttpStatusChecker httpStatusChecker = new HttpStatusChecker();
-        try {
-            System.out.println(httpStatusChecker.getStatusImage(418));
+    public static void main(String[] args) throws IOException, InterruptedException {
+      System.out.println(new HttpStatusChecker().getStatusImage(200));
+       System.out.println("--------------------------------------");
+        System.out.println(new HttpStatusChecker().getStatusImage(1000));
+        System.out.println("--------------------------------------");
+        new HttpStatusImageDownloader().downloadStatusImage(1012);
+       new HttpStatusImageDownloader().downloadStatusImage(418);
+//        HttpImageStatusCli cli = new HttpImageStatusCli();
+//        cli.askStatus();
 
-        System.out.println("-------------------------------");
-        System.out.println(httpStatusChecker.getStatusImage(1000));
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
