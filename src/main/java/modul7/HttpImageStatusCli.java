@@ -1,4 +1,5 @@
 package modul7;
+
 import java.util.Scanner;
 
 public class HttpImageStatusCli {
@@ -9,21 +10,25 @@ public class HttpImageStatusCli {
     void askStatus() {
 
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (!isExit) {
             System.out.print("Enter HTTP status code, or exit to end the program");
-            if (scanner.hasNextInt()) {
-                int userInput = scanner.nextInt();
-                new HttpStatusChecker().getStatusImage(userInput);
-                downloader.downloadStatusImage(userInput);
-                continue;
+            String userInput = scanner.nextLine();
+            if ("exit".equalsIgnoreCase(userInput)) {
+                isExit = true;
             } else {
-                System.out.println("Please enter valid number or exit");
-            }
-            String stop = scanner.nextLine();
-            if (stop.equalsIgnoreCase("exit")) {
-                break;
+                try {
+                    int code = Integer.parseInt(userInput.strip());
+                    String url = new HttpStatusChecker().getStatusImage((code));
+                    if (url != null) {
+                        downloader.downloadStatusImage((code));
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter valid number or exit");
+                }
+
             }
         }
     }
 }
+
 
