@@ -8,8 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class HttpStatusChecker {
-    HelperClass help = new HelperClass();
-   private HttpResponse<String> response = null;
+    private HttpResponse<String> response = null;
 
     public String getStatusImage(int code) {
         String url = "https://http.cat/" + code + ".jpg";
@@ -26,7 +25,7 @@ public class HttpStatusChecker {
                 throw new IOException("Failed to retrieve image. Response code: " + response.statusCode());
             }
         } catch (IOException | InterruptedException e) {
-            System.err.println("There is not image for HTTP status "+code);
+            System.err.println("There is not image for HTTP status " + code);
         }
         return "Failed to retrieve image. Response code: " + response.statusCode();
     }

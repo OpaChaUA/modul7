@@ -1,41 +1,29 @@
 package modul7;
-import java.io.IOException;
+
+
 import java.util.Scanner;
 
 public class HttpImageStatusCli {
 
-  private static boolean isExit =false;
+    private static boolean isExit = false;
+    private HttpStatusImageDownloader downloader = new HttpStatusImageDownloader();
 
+    void askStatus() {
 
-            public static void main(String[] args) throws IOException {
-                HttpStatusImageDownloader downloader = new HttpStatusImageDownloader();
-                HelperClass helperClass = new HelperClass();
-                Scanner scanner = new Scanner(System.in);
-                while (!isExit) {
-                    System.out.print("Enter HTTP status code");
-                    String userInput = scanner.nextLine();
-                    if (isNumber(userInput)) {
-
-                        if (userInput.equals(new HttpStatusChecker().getStatusImage(Integer.parseInt(userInput)))){
-                            downloader.downloadStatusImage(Integer.parseInt(userInput));
-                        }
-                    } else {
-                        System.out.println("Please enter valid number");
-                    }
-                    System.out.println("Enter Exit to exit");
-                    String stop = scanner.nextLine();
-                    isExit =stop.equals("exit");
-
-                }
+        Scanner scanner = new Scanner(System.in);
+        while (!isExit) {
+            System.out.print("Enter HTTP status code, or exit to end the program");
+            if (scanner.hasNextInt()) {
+                int userInput = scanner.nextInt();
+                new HttpStatusChecker().getStatusImage(userInput);
+                downloader.downloadStatusImage(userInput);
+            } else {
+                System.out.println("Please enter valid number or exit");
+                continue;
             }
-
-            public static boolean isNumber(String input) {
-                try {
-                    Double.parseDouble(input);
-                    return true;
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-            }
+            String stop = scanner.nextLine();
+            isExit = stop.equals("exit");
         }
+    }
+}
 
