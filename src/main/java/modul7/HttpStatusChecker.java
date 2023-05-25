@@ -25,8 +25,8 @@ public class HttpStatusChecker {
                 throw new IOException("Failed to retrieve image. Response code: " + response.statusCode());
             }
         } catch (IOException | InterruptedException e) {
-            System.err.println("There is not image for HTTP status " + code);
+            System.err.println("\n There is not image for HTTP status " + code);
         }
-        return "Failed to retrieve image. Response code: " + response.statusCode();
+        return null;
     }
 }
